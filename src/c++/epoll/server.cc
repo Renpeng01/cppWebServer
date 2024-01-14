@@ -102,10 +102,10 @@ int main() {
           // 如果在windows中,读socket中的数据要用recv()函数
           int len = read(events[i].data.fd, buff, sizeof(buff));
           // 如果读取数据出错,关闭并从epoll中删除连接
-          if (len == -1) {
-            epoll_ctl(eFd, EPOLL_CTL_DEL, events[i].data.fd, nullptr);
+          if (len == -1) {L_DEL, events[i].data.fd, nullptr);
             cout << "client out fd:" << events[i].data.fd << endl;
             close(events[i].data.fd);
+            epoll_ctl(eFd, EPOLL_CT
           } else {
             // 正常读取,打印读到的数据
             cout << buff << endl;
