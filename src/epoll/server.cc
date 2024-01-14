@@ -1,11 +1,11 @@
-include<iostream>       // 控制台输出
 #include <fcntl.h>      //设置非阻塞
+#include <iostream>     // 控制台输出
 #include <netinet/in.h> //socket addr
 #include <sys/epoll.h>  //epoll
 #include <sys/socket.h> //创建socket
 #include <unistd.h>     //close函数
 
-    using namespace std;
+using namespace std;
 
 int main() {
   const int EVENTS_SIZE = 20;
@@ -17,7 +17,7 @@ int main() {
 
   // 设置socket监听的地址和端口
   sockaddr_in sockAddr{};
-  sockAddr.sin_port = htons(8088);
+  sockAddr.sin_port = htons(8988);
   sockAddr.sin_family = AF_INET;
   sockAddr.sin_addr.s_addr = htons(INADDR_ANY);
 
