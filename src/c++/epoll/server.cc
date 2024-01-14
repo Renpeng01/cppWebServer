@@ -1,5 +1,5 @@
 #include <fcntl.h>      //设置非阻塞
-#include <iostream>     // 控制台输出
+#include <iostream>     //控制台输出
 #include <netinet/in.h> //socket addr
 #include <sys/epoll.h>  //epoll
 #include <sys/socket.h> //创建socket
@@ -17,7 +17,7 @@ int main() {
 
   // 设置socket监听的地址和端口
   sockaddr_in sockAddr{};
-  sockAddr.sin_port = htons(8988);
+  sockAddr.sin_port = htons(8088);
   sockAddr.sin_family = AF_INET;
   sockAddr.sin_addr.s_addr = htons(INADDR_ANY);
 
@@ -102,10 +102,10 @@ int main() {
           // 如果在windows中,读socket中的数据要用recv()函数
           int len = read(events[i].data.fd, buff, sizeof(buff));
           // 如果读取数据出错,关闭并从epoll中删除连接
-          if (len == -1) {L_DEL, events[i].data.fd, nullptr);
+          if (len == -1) {
+            epoll_ctl(eFd, EPOLL_CTL_DEL, events[i].data.fd, nullptr);
             cout << "client out fd:" << events[i].data.fd << endl;
             close(events[i].data.fd);
-            epoll_ctl(eFd, EPOLL_CT
           } else {
             // 正常读取,打印读到的数据
             cout << buff << endl;
